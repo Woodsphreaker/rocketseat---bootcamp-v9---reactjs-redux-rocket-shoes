@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { MdAddShoppingCart } from 'react-icons/md'
 import api from '../../services/api'
+import formatPrice from '../../util/formatPrice'
 
 import { ProductList } from './styles'
 
@@ -12,12 +13,9 @@ class Home extends Component {
   componentDidMount = async () => {
     const { data } = await api.get('/products')
 
-    const products = data.map(({ price, ...rest }) => ({
-      price: price.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      }),
-      ...rest,
+    const products = data.map(({ price, ...product }) => ({
+      price: formatPrice(price),
+      ...product,
     }))
 
     this.setState({
