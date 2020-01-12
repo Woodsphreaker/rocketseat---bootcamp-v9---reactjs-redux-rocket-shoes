@@ -1,24 +1,40 @@
 import React, { Component } from 'react'
 import { MdAddShoppingCart } from 'react-icons/md'
+import api from '../../services/api'
 
 import { ProductList } from './styles'
 
 class Home extends Component {
-  state = {}
+  state = {
+    products: [],
+  }
 
-  componentDidMount = () => {}
+  componentDidMount = async () => {
+    const { data } = await api.get('/products')
+
+    const products = data.map(({ price, ...rest }) => ({
+      price: price.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }),
+      ...rest,
+    }))
+
+    this.setState({
+      products,
+    })
+  }
 
   render() {
+    const { products } = this.state
+
     return (
       <ProductList>
-        {Array.from({ length: 5 }, () => (
-          <li>
-            <img
-              src="https://static.netshoes.com.br/produtos/tenis-nike-md-runner-2-masculino/26/D12-1407-026/D12-1407-026_detalhe1.jpg?ims=326x"
-              alt="tenis"
-            />
-            <strong>Ténis Nike</strong>
-            <span>R$ 129,90</span>
+        {products.map(product => (
+          <li key={product.id}>
+            <img src={product.image} alt={product.title} />
+            <strong>{product.title}</strong>
+            <span>{product.price}</span>
 
             <button type="button">
               <div>

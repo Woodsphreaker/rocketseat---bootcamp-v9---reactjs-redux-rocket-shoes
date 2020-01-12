@@ -7,7 +7,32 @@ import {
 import { Container, ProductTable, Total } from './styles'
 
 class Cart extends Component {
+  state = {
+    ammount: 1,
+    price: 129.9,
+  }
+
+  sub = () => {
+    const { ammount, price } = this.state
+
+    this.setState({
+      ammount: ammount - 1,
+      price: price / ammount,
+    })
+  }
+
+  add = () => {
+    const { ammount, price } = this.state
+
+    this.setState({
+      ammount: ammount + 1,
+      price: (ammount + 1) * price,
+    })
+  }
+
   render() {
+    const { ammount, price } = this.state
+
     return (
       <Container>
         <ProductTable>
@@ -35,16 +60,24 @@ class Cart extends Component {
               <td>
                 <div>
                   <button>
-                    <MdRemoveCircleOutline size={20} color="#7159c1" />
+                    <MdRemoveCircleOutline
+                      size={20}
+                      color="#7159c1"
+                      onClick={this.sub}
+                    />
                   </button>
-                  <input type="number" readOnly value={2} />
+                  <input type="number" readOnly value={ammount} />
                   <button>
-                    <MdAddCircleOutline size={20} color="#7159c1" />
+                    <MdAddCircleOutline
+                      size={20}
+                      color="#7159c1"
+                      onClick={this.add}
+                    />
                   </button>
                 </div>
               </td>
               <td>
-                <strong>R$258,80</strong>
+                <strong>{price}</strong>
               </td>
               <td>
                 <button type="button">

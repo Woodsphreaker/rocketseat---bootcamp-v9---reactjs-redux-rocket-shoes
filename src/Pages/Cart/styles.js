@@ -70,12 +70,12 @@ const ProductTable = styled.table`
       padding: 6px;
       width: 50px;
     }
+  }
 
-    button {
-      padding: 6px;
-      border: none;
-      background: none;
-    }
+  button {
+    padding: 6px;
+    border: none;
+    background: none;
   }
 `
 
