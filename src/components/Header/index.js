@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import propTypes from 'prop-types'
+// import propTypes from 'prop-types'
 
 import { MdShoppingBasket } from 'react-icons/md'
 
@@ -29,11 +29,6 @@ const Header = ({ cart, cartSize }) => {
       </Container>
     </>
   )
-}
-
-Header.propTypes = {
-  cart: propTypes.shape().isRequired,
-  cartSize: propTypes.shape().isRequired,
 }
 
 export default connect(({ cart }) => ({ cart, cartSize: cart.length }))(Header)
