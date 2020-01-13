@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import propTypes from 'prop-types'
+import { connect } from 'react-redux'
 import {
   MdRemoveCircleOutline,
   MdAddCircleOutline,
@@ -8,30 +10,22 @@ import { Container, ProductTable, Total } from './styles'
 
 class Cart extends Component {
   state = {
-    ammount: 1,
-    price: 129.9,
+    cart: [],
   }
 
-  sub = () => {
-    const { ammount, price } = this.state
-
-    this.setState({
-      ammount: ammount - 1,
-      price: price / ammount,
-    })
+  static propTypes = {
+    cart: propTypes.shape().isRequired,
   }
 
-  add = () => {
-    const { ammount, price } = this.state
-
+  componentDidMount = () => {
+    const { cart } = this.props
     this.setState({
-      ammount: ammount + 1,
-      price: (ammount + 1) * price,
+      cart,
     })
   }
 
   render() {
-    const { ammount, price } = this.state
+    const { cart } = this.state
 
     return (
       <Container>
@@ -46,45 +40,44 @@ class Cart extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <img
-                  src="https://static.netshoes.com.br/produtos/tenis-nike-md-runner-2-masculino/26/D12-1407-026/D12-1407-026_detalhe1.jpg?ims=326x"
-                  alt="tênis"
-                />
-              </td>
-              <td>
-                <strong>Tênis Nike</strong>
-                <span>R$129,90</span>
-              </td>
-              <td>
-                <div>
-                  <button>
-                    <MdRemoveCircleOutline
-                      size={20}
-                      color="#7159c1"
-                      onClick={this.sub}
-                    />
+            {cart.map(product => (
+              <tr key={product.id}>
+                <td>
+                  <img src={product.image} alt={product.title} />
+                </td>
+                <td>
+                  <strong>{product.title}</strong>
+                  <span>{product.price}</span>
+                </td>
+                <td>
+                  <div>
+                    <button>
+                      <MdRemoveCircleOutline
+                        size={20}
+                        color="#7159c1"
+                        onClick={() => ''}
+                      />
+                    </button>
+                    <input type="number" readOnly value={product.amount} />
+                    <button>
+                      <MdAddCircleOutline
+                        size={20}
+                        color="#7159c1"
+                        onClick={() => ''}
+                      />
+                    </button>
+                  </div>
+                </td>
+                <td>
+                  <strong>{0}</strong>
+                </td>
+                <td>
+                  <button type="button">
+                    <MdDelete size={20} color="#7150c1" />
                   </button>
-                  <input type="number" readOnly value={ammount} />
-                  <button>
-                    <MdAddCircleOutline
-                      size={20}
-                      color="#7159c1"
-                      onClick={this.add}
-                    />
-                  </button>
-                </div>
-              </td>
-              <td>
-                <strong>{price}</strong>
-              </td>
-              <td>
-                <button type="button">
-                  <MdDelete size={20} color="#7150c1" />
-                </button>
-              </td>
-            </tr>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </ProductTable>
 
@@ -100,4 +93,4 @@ class Cart extends Component {
   }
 }
 
-export default Cart
+export default connect(({ cart }) => ({ cart }))(Cart)

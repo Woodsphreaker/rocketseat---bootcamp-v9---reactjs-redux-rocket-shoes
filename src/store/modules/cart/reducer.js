@@ -1,10 +1,12 @@
+import { add, remove } from './actions'
+
 const cart = (state = [], action) => {
   const actions = {
-    ADD_TO_CART: () => [...state, action.product],
+    ADD_TO_CART: add,
+    REMOVE_TO_CART: remove,
     default: () => state,
   }
-  console.log('cart', state, action)
-  return (actions[action.type] || actions.default)()
+  return (actions[action.type] || actions.default)(state, action.product)
 }
 
 export default cart

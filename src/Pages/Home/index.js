@@ -55,7 +55,8 @@ class Home extends Component {
               onClick={() => this.handleAddProduct(product)}
             >
               <div>
-                <MdAddShoppingCart size={16} color="#fff" /> 3
+                <MdAddShoppingCart size={16} color="#fff" />
+                {product.amount || 0}
               </div>
               <span>ADICIONAR AO CARRINHO</span>
             </button>
@@ -66,4 +67,4 @@ class Home extends Component {
   }
 }
 
-export default connect()(Home)
+export default connect(state => state)(Home)

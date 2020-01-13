@@ -2,6 +2,9 @@ import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import Routes from './routes'
 
+// Reactotron
+import './config/reactotron'
+
 // Redux
 import { Provider } from 'react-redux'
 
