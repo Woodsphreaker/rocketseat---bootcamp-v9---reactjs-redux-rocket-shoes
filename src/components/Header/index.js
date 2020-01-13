@@ -31,4 +31,9 @@ const Header = ({ cart, cartSize }) => {
   )
 }
 
-export default connect(({ cart }) => ({ cart, cartSize: cart.length }))(Header)
+const mapStateToProps = state => ({
+  cart: state.cart,
+  cartSize: state.cart.length,
+})
+
+export default connect(mapStateToProps)(Header)

@@ -67,4 +67,4 @@ class Home extends Component {
   }
 }
 
-export default connect(state => state)(Home)
+export default connect()(Home)

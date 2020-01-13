@@ -6,7 +6,7 @@ const cart = (state = [], action) => {
     REMOVE_TO_CART: remove,
     default: () => state,
   }
-  return (actions[action.type] || actions.default)(state, action.product)
+  return (actions[action.type] || actions.default)(state, action)
 }
 
 export default cart

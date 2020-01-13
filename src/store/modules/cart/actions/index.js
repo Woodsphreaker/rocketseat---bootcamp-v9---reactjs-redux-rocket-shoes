@@ -1,18 +1,18 @@
-const add = (state, product) => {
-  const hasProductAdd = state.find(({ id }) => product.id === id)
+const add = (state, { product }) => {
+  const hasProductAdd = state.findIndex(({ id }) => product.id === id)
 
-  if (hasProductAdd) {
+  if (hasProductAdd !== -1) {
     return state.map(el => ({
       ...el,
-      amount: el.id === hasProductAdd.id ? el.amount + 1 : el.amount,
+      amount: el.id === product.id ? el.amount + 1 : el.amount,
     }))
   }
 
   return [...state, { ...product, amount: 1 }]
 }
 
-const remove = (state, product) => {
-  return state.filter(el => el.id !== product.id)
+const remove = (state, { productID }) => {
+  return state.filter(el => el.id !== productID)
 }
 
 export { add, remove }
