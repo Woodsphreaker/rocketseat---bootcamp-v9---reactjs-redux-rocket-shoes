@@ -18,7 +18,6 @@ const Header = ({ cart, cartSize }) => {
         <Link to="/">
           <img src={logo} alt="RocketShoes" title="RocketShoes" />
         </Link>
-
         <Cart to="/cart">
           <div>
             <strong>Meu Carrinho</strong>

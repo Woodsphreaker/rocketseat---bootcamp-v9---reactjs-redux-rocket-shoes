@@ -9,6 +9,9 @@ import { ProductList } from './styles'
 // PropTypes
 import propTypes from 'prop-types'
 
+// Reducer Actions
+import { addToCart } from '../../store/modules/cart/actions'
+
 class Home extends Component {
   state = {
     products: [],
@@ -33,10 +36,7 @@ class Home extends Component {
 
   handleAddProduct = product => {
     const { dispatch } = this.props
-    dispatch({
-      type: 'ADD_TO_CART',
-      product,
-    })
+    dispatch(addToCart(product))
   }
 
   render() {

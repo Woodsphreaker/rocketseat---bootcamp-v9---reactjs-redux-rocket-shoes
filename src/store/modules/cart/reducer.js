@@ -1,4 +1,4 @@
-import { add, remove } from './actions'
+import { add, remove } from './operations'
 
 const cart = (state = [], action) => {
   const actions = {

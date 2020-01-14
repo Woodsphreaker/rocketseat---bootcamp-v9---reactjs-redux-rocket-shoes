@@ -8,12 +8,12 @@ import {
 } from 'react-icons/md'
 import { Container, ProductTable, Total } from './styles'
 
+// Reducer Actions
+import { removeFromCart } from '../../store/modules/cart/actions'
+
 const Cart = ({ cart, dispatch }) => {
   const handleRemoveProduct = productID => {
-    dispatch({
-      type: 'REMOVE_TO_CART',
-      productID,
-    })
+    dispatch(removeFromCart(productID))
   }
 
   return (
