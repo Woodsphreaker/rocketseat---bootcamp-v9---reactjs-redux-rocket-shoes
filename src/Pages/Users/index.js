@@ -1,24 +1,33 @@
 import React from 'react'
-
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-const User = ({ dispatch }) => {
+// Reducer Actions
+import * as UserActions from '../../store/modules/user/actions'
+
+const User = ({ addUser, removeUser, state }) => {
   const AddUser = () => {
-    dispatch({
-      type: 'ADD_USER',
-      data: {
-        id: 1,
-        name: 'woods',
-        age: '42',
-      },
+    addUser({
+      id: 1,
+      name: 'woods',
+      age: '42',
     })
+    // dispatch({
+    //   type: 'ADD_USER',
+    //   data: {
+    //     id: 1,
+    //     name: 'woods',
+    //     age: '42',
+    //   },
+    // })
   }
 
   const RemoveUser = () => {
-    dispatch({
-      type: 'REMOVE_USER',
-      id: 1,
-    })
+    // dispatch({
+    //   type: 'REMOVE_USER',
+    //   id: 1,
+    // })
+    removeUser(1)
   }
 
   return (
@@ -34,4 +43,6 @@ const User = ({ dispatch }) => {
   )
 }
 
-export default connect()(User)
+const mapDispatchToProps = dispatch => bindActionCreators(UserActions, dispatch)
+
+export default connect(state => ({ state }), mapDispatchToProps)(User)

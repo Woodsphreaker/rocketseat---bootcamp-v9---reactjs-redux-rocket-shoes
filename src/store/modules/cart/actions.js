@@ -1,10 +1,10 @@
 const addToCart = product => ({
-  type: 'ADD_TO_CART',
+  type: '@cart/ADD',
   product,
 })
 
 const removeFromCart = productID => ({
-  type: 'REMOVE_TO_CART',
+  type: '@cart/REMOVE',
   productID,
 })
 

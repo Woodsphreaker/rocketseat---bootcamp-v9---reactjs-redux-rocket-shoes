@@ -36,8 +36,11 @@ class Home extends Component {
   }
 
   handleAddProduct = product => {
-    const { addToCart } = this.props
-    // dispatch(addToCart(product))
+    const { addToCart } = this.props // Passed props whith mapDispatchToProps and bindActionCreators
+    // dispatch({
+    //   type: 'ADD_TO_CART',
+    //   product
+    // })
     addToCart(product)
   }
 

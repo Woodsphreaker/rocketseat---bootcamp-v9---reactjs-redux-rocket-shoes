@@ -2,8 +2,8 @@ import { add, remove } from './operations'
 
 const user = (state = [], action) => {
   const actions = {
-    ADD_USER: add,
-    REMOVE_USER: remove,
+    '@user/ADD': add,
+    '@user/REMOVE': remove,
     default: () => state,
   }
 
