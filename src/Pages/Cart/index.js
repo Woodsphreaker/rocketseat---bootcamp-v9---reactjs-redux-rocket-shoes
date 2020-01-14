@@ -1,5 +1,6 @@
 import React from 'react'
 // import propTypes from 'prop-types'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {
   MdRemoveCircleOutline,
@@ -9,11 +10,11 @@ import {
 import { Container, ProductTable, Total } from './styles'
 
 // Reducer Actions
-import { removeFromCart } from '../../store/modules/cart/actions'
+import * as CartActions from '../../store/modules/cart/actions'
 
-const Cart = ({ cart, dispatch }) => {
+const Cart = ({ cart, removeFromCart }) => {
   const handleRemoveProduct = productID => {
-    dispatch(removeFromCart(productID))
+    removeFromCart(productID)
   }
 
   return (
@@ -88,4 +89,6 @@ const mapStateToProps = state => ({
   cart: state.cart,
 })
 
-export default connect(mapStateToProps)(Cart)
+const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
