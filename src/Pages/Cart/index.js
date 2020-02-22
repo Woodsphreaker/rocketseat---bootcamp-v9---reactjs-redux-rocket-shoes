@@ -9,10 +9,14 @@ import {
 } from 'react-icons/md'
 import { Container, ProductTable, Total } from './styles'
 
+import totalPrice from '../../util/totalPrice'
+import subTotalPrice from '../../util/subTotalPrice'
+import formatPrice from '../../util/formatPrice'
+
 // Reducer Actions
 import * as CartActions from '../../store/modules/cart/actions'
 
-const Cart = ({ cart, removeFromCart }) => {
+const Cart = ({ cart, removeFromCart, total }) => {
   const handleRemoveProduct = productID => {
     removeFromCart(productID)
   }
@@ -37,7 +41,7 @@ const Cart = ({ cart, removeFromCart }) => {
               </td>
               <td>
                 <strong>{product.title}</strong>
-                <span>{product.price}</span>
+                <span>{product.formatedPrice}</span>
               </td>
               <td>
                 <div>
@@ -59,7 +63,7 @@ const Cart = ({ cart, removeFromCart }) => {
                 </div>
               </td>
               <td>
-                <strong>{0}</strong>
+                <strong>{formatPrice(product.subTotal || 0)}</strong>
               </td>
               <td>
                 <button
@@ -78,16 +82,20 @@ const Cart = ({ cart, removeFromCart }) => {
         <button type="button">Finalizar Pedido</button>
         <Total>
           <span>Total</span>
-          <strong>R$1900,00</strong>
+          <strong>{formatPrice(total)}</strong>
         </Total>
       </footer>
     </Container>
   )
 }
 
-const mapStateToProps = state => ({
-  cart: state.cart,
-})
+const mapStateToProps = state => {
+  console.tron.log(state)
+  return {
+    cart: subTotalPrice(state.cart),
+    total: totalPrice(state.cart),
+  }
+}
 
 const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch)
 

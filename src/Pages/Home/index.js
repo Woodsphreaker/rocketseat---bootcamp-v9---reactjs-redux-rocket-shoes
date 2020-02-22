@@ -26,7 +26,8 @@ class Home extends Component {
     const { data } = await api.get('/products')
 
     const products = data.map(({ price, ...product }) => ({
-      price: formatPrice(price),
+      formatedPrice: formatPrice(price),
+      price,
       ...product,
     }))
 
@@ -46,6 +47,8 @@ class Home extends Component {
 
   render() {
     const { products } = this.state
+    const { cart } = this.props
+    console.tron.log(cart)
 
     return (
       <ProductList>
@@ -53,7 +56,7 @@ class Home extends Component {
           <li key={product.id}>
             <img src={product.image} alt={product.title} />
             <strong>{product.title}</strong>
-            <span>{product.price}</span>
+            <span>{product.formatedPrice}</span>
 
             <button
               type="button"
@@ -61,7 +64,7 @@ class Home extends Component {
             >
               <div>
                 <MdAddShoppingCart size={16} color="#fff" />
-                {product.amount || 0}
+                {0}
               </div>
               <span>ADICIONAR AO CARRINHO</span>
             </button>
@@ -74,4 +77,10 @@ class Home extends Component {
 
 const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch)
 
-export default connect(null, mapDispatchToProps)(Home)
+const mapStateToProps = state => {
+  return {
+    cart: state.cart,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
