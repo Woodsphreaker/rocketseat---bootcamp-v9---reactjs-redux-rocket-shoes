@@ -1,5 +1,5 @@
 import React from 'react'
-// import propTypes from 'prop-types'
+import propTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {
@@ -9,14 +9,12 @@ import {
 } from 'react-icons/md'
 import { Container, ProductTable, Total } from './styles'
 
-import totalPrice from '../../util/totalPrice'
-import subTotalPrice from '../../util/subTotalPrice'
 import formatPrice from '../../util/formatPrice'
 
 // Reducer Actions
 import * as CartActions from '../../store/modules/cart/actions'
 
-const Cart = ({ cart, removeFromCart, total }) => {
+const Cart = ({ cart, updateAmount, removeFromCart, total }) => {
   const handleRemoveProduct = productID => {
     removeFromCart(productID)
   }
@@ -49,7 +47,9 @@ const Cart = ({ cart, removeFromCart, total }) => {
                     <MdRemoveCircleOutline
                       size={20}
                       color="#7159c1"
-                      onClick={() => ''}
+                      onClick={() =>
+                        updateAmount(product.id, product.amount - 1)
+                      }
                     />
                   </button>
                   <input type="number" readOnly value={product.amount} />
@@ -57,7 +57,9 @@ const Cart = ({ cart, removeFromCart, total }) => {
                     <MdAddCircleOutline
                       size={20}
                       color="#7159c1"
-                      onClick={() => ''}
+                      onClick={() =>
+                        updateAmount(product.id, product.amount + 1)
+                      }
                     />
                   </button>
                 </div>
@@ -89,14 +91,34 @@ const Cart = ({ cart, removeFromCart, total }) => {
   )
 }
 
+const formatState = state => {
+  return state.map(product => ({
+    ...product,
+    subTotal: product.price * product.amount,
+  }))
+}
+
+const totalPrice = state => {
+  return state.reduce((acc, { price = 0, amount = 0 }) => {
+    acc += price * amount
+    return acc
+  }, 0)
+}
+
 const mapStateToProps = state => {
-  console.tron.log(state)
   return {
-    cart: subTotalPrice(state.cart),
+    cart: formatState(state.cart),
     total: totalPrice(state.cart),
   }
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch)
+
+Cart.propTypes = {
+  cart: propTypes.array.isRequired,
+  removeFromCart: propTypes.func.isRequired,
+  updateAmount: propTypes.func.isRequired,
+  total: propTypes.number.isRequired,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)

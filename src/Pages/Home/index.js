@@ -20,6 +20,8 @@ class Home extends Component {
 
   static propTypes = {
     dispatch: propTypes.func.isRequired,
+    addToCart: propTypes.func.isRequired,
+    cart: propTypes.array,
   }
 
   componentDidMount = async () => {
@@ -47,8 +49,8 @@ class Home extends Component {
 
   render() {
     const { products } = this.state
-    const { cart } = this.props
-    console.tron.log(cart)
+    // const { cart } = this.props
+    // console.tron.log(cart)
 
     return (
       <ProductList>

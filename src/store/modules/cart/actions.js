@@ -8,4 +8,10 @@ const removeFromCart = productID => ({
   productID,
 })
 
-export { addToCart, removeFromCart }
+const updateAmount = (productID, amount) => ({
+  type: '@cart/UPDATE_AMOUNT',
+  productID,
+  amount,
+})
+
+export { addToCart, updateAmount, removeFromCart }

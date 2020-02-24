@@ -15,4 +15,12 @@ const remove = (state, { productID }) => {
   return state.filter(el => el.id !== productID)
 }
 
-export { add, remove }
+const updateAmount = (state, { productID, amount }) => {
+  if (amount <= 0) {
+    return state
+  }
+
+  return state.map(el => (el.id === productID ? { ...el, amount } : el))
+}
+
+export { add, remove, updateAmount }

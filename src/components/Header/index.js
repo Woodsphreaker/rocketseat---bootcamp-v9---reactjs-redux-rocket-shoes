@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-// import propTypes from 'prop-types'
-
+import propTypes from 'prop-types'
 import { MdShoppingBasket } from 'react-icons/md'
 
 // redux
@@ -11,7 +10,7 @@ import { connect } from 'react-redux'
 import { Container, Cart } from './styles'
 import logo from '../../assets/images/logo.svg'
 
-const Header = ({ cart, cartSize }) => {
+const Header = ({ cartSize }) => {
   return (
     <>
       <Container>
@@ -34,5 +33,9 @@ const mapStateToProps = state => ({
   cart: state.cart,
   cartSize: state.cart.length,
 })
+
+Header.propTypes = {
+  cartSize: propTypes.number.isRequired,
+}
 
 export default connect(mapStateToProps)(Header)
