@@ -22,6 +22,7 @@ class Home extends Component {
     dispatch: propTypes.func.isRequired,
     addToCart: propTypes.func.isRequired,
     cart: propTypes.array,
+    amount: propTypes.object,
   }
 
   componentDidMount = async () => {
@@ -49,7 +50,8 @@ class Home extends Component {
 
   render() {
     const { products } = this.state
-    // const { cart } = this.props
+    const { amount } = this.props
+    console.tron.log(amount)
     // console.tron.log(cart)
 
     return (
@@ -66,7 +68,7 @@ class Home extends Component {
             >
               <div>
                 <MdAddShoppingCart size={16} color="#fff" />
-                {0}
+                {amount[product.id] || 0}
               </div>
               <span>ADICIONAR AO CARRINHO</span>
             </button>
@@ -81,7 +83,10 @@ const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch)
 
 const mapStateToProps = state => {
   return {
-    cart: state.cart,
+    amount: state.cart.reduce((acc, el) => {
+      acc[el.id] = el.amount
+      return acc
+    }, {}),
   }
 }
 
