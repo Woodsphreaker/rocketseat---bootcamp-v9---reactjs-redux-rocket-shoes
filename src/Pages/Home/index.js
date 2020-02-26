@@ -19,7 +19,7 @@ class Home extends Component {
   }
 
   static propTypes = {
-    dispatch: propTypes.func.isRequired,
+    // dispatch: propTypes.func.isRequired,
     addToCart: propTypes.func.isRequired,
     cart: propTypes.array,
     amount: propTypes.object,
