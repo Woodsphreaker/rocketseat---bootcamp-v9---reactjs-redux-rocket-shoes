@@ -7,7 +7,15 @@ import rootReducer from './modules/rootReducer'
 // root saga
 import rootSaga from './modules/rootSaga'
 
-const sagaMiddleware = createSagaMiddleware()
+// reactotron saga monitor
+const sagaMonitor =
+  process.env.NODE_ENV === 'development'
+    ? console.tron.createSagaMonitor()
+    : null
+
+const sagaMiddleware = createSagaMiddleware({
+  sagaMonitor,
+})
 
 // reactotron redux
 const enhancer =
