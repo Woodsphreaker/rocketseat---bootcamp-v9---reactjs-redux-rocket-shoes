@@ -1,5 +1,10 @@
-const addToCart = product => ({
-  type: '@cart/ADD',
+const addToCartRequest = productID => ({
+  type: '@cart/ADD_REQUEST',
+  productID,
+})
+
+const addToCartSuccess = product => ({
+  type: '@cart/ADD_SUCCESS',
   product,
 })
 
@@ -14,4 +19,4 @@ const updateAmount = (productID, amount) => ({
   amount,
 })
 
-export { addToCart, updateAmount, removeFromCart }
+export { addToCartRequest, addToCartSuccess, updateAmount, removeFromCart }

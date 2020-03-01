@@ -1,8 +1,8 @@
-import { add, remove, updateAmount } from './operations'
+import { addSuccess, remove, updateAmount } from './operations'
 
 const cart = (state = [], action) => {
   const actions = {
-    '@cart/ADD': add,
+    '@cart/ADD_SUCCESS': addSuccess,
     '@cart/REMOVE': remove,
     '@cart/UPDATE_AMOUNT': updateAmount,
     default: () => state,

@@ -20,7 +20,7 @@ class Home extends Component {
 
   static propTypes = {
     // dispatch: propTypes.func.isRequired,
-    addToCart: propTypes.func.isRequired,
+    addToCartRequest: propTypes.func.isRequired,
     cart: propTypes.array,
     amount: propTypes.object,
   }
@@ -39,13 +39,14 @@ class Home extends Component {
     })
   }
 
-  handleAddProduct = product => {
-    const { addToCart } = this.props // Passed props whith mapDispatchToProps and bindActionCreators
+  handleAddProduct = productID => {
+    const { addToCartRequest } = this.props // Passed props whith mapDispatchToProps and bindActionCreators
+
     // dispatch({
     //   type: 'ADD_TO_CART',
-    //   product
+    //   id
     // })
-    addToCart(product)
+    addToCartRequest(productID)
   }
 
   render() {
@@ -64,7 +65,7 @@ class Home extends Component {
 
             <button
               type="button"
-              onClick={() => this.handleAddProduct(product)}
+              onClick={() => this.handleAddProduct(product.id)}
             >
               <div>
                 <MdAddShoppingCart size={16} color="#fff" />

@@ -1,4 +1,4 @@
-const add = (state, { product }) => {
+const addSuccess = (state, { product }) => {
   const hasProductAdd = state.findIndex(({ id }) => product.id === id)
 
   if (hasProductAdd !== -1) {
@@ -23,4 +23,4 @@ const updateAmount = (state, { productID, amount }) => {
   return state.map(el => (el.id === productID ? { ...el, amount } : el))
 }
 
-export { add, remove, updateAmount }
+export { addSuccess, remove, updateAmount }
