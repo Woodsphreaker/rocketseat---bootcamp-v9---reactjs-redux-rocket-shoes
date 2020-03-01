@@ -5,7 +5,7 @@ import reactotronReduxSaga from 'reactotron-redux-saga'
 if (process.env.NODE_ENV === 'development') {
   const tron = Reactotron.configure()
     .use(reactotronRedux())
-    .use(reactotronReduxSaga)
+    .use(reactotronReduxSaga())
     .connect()
 
   tron.clear()
